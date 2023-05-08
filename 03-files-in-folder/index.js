@@ -18,7 +18,7 @@ fs.readdir(textPath, {withFileTypes: true}, (err, files) => {
           console.log(`Error!`);
         }
         else {
-          console.log(`${name.split('.')[0]} - ${extension.slice(1)} - ${Math.round(states.size / 1024)}kb`);
+          console.log(`${name.split('.')[0]} - ${extension.slice(1)} - ${(states.size / 1024).toFixed(3)}kb`);
         }
       });
       }
