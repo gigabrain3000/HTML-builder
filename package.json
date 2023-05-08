@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "html-builder task for RSSchool",
   "scripts": {
-    "read": "node 01-read-file/index.js"
+    "read": "node 01-read-file",
+    "write": "node 02-write-file"
   },
   "author": "evgeniimal",
   "license": "ISC",
