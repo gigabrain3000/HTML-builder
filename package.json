@@ -4,7 +4,8 @@
   "description": "html-builder task for RSSchool",
   "scripts": {
     "read": "node 01-read-file",
-    "write": "node 02-write-file"
+    "write": "node 02-write-file",
+    "folder": "node 03-files-in-folder"
   },
   "author": "evgeniimal",
   "license": "ISC",
