@@ -14,7 +14,7 @@ fs.readdir(stylesFolder, {withFileTypes: true}, (err, files) => {
         console.log(`Error! ${name} is not a file!`);
       }
       else if (name.split('.')[1] != 'css') {
-        console.log('Error! Wrong file extension!');
+        console.log(`Error! ${name} has wrong file extension!`);
       }
       else {
       const stream = fs.createReadStream(path.join(`${stylesFolder}\\${name}`), 'utf-8');
