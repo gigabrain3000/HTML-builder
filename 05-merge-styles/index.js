@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const stylesFolder = path.join(__dirname, 'styles');
-const bundleCSS = path.join(__dirname, 'styles', 'bundle.css');
+const bundleCSS = path.join(__dirname, 'project-dist', 'bundle.css');
 
 fs.readdir(stylesFolder, {withFileTypes: true}, (err, files) => {
   let arr = [];
