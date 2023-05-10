@@ -87,18 +87,40 @@ fs.mkdir(distFolder, {recursive: true}, (err) => {
     }
 
     //Замена шаблонных тегов в template.html на содержимое файлов папки components и копирование обновленного содержимого в index.html
-    /*fs.readFile(templateFile, 'utf-8', (err) => {
+    fs.readFile(templateFile, 'utf-8', (err, template) => {
       if (err) {
         throw err;
       }
-      fs.readdir(componentsFolder, {withFileTypes: true}, (err, files) => {
+      fs.readdir(componentsFolder, (err, files) => {
         if (err) {
           throw err;
         }
-        files.forEach((file) => {
+        const components = {};
+        let filesRead = 0;
 
+        files.forEach((file) => {
+          const componentsFile = path.join(componentsFolder, file);
+          fs.readFile(componentsFile, 'utf-8', (err, content) => {
+            if (err) {
+              console.log('Error! 1', err);
+            }
+            components[file.split('.')[0]] = content;
+            filesRead++;
+            if (filesRead === files.length) {
+              const replacedTemplate = template.replace(/\{\{(\w+)\}\}/g, (match, tag) => {
+                return components[tag] || '';
+              });
+              fs.writeFile(indexHTML, replacedTemplate, (err) => {
+                if (err) {
+                  console.log('Error! 2', err);
+                  return;
+                }
+                console.log('Index.html created successfully');
+              });
+            }
+          });
         });
       });
-    });*/
+    });
   }
 });

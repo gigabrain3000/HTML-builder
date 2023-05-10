@@ -23,7 +23,7 @@ fs.readdir(stylesFolder, {withFileTypes: true}, (err, files) => {
       });
       stream.on('end', () => {
         const cssCode = arr.join('');
-          fs.appendFile(bundleCSS, `${cssCode}\n`, (err) => {
+          fs.writeFile(bundleCSS, `${cssCode}\n`, (err) => {
             if (err) {
               console.log('Error!');
             }
