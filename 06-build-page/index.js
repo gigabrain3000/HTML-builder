@@ -65,23 +65,28 @@ fs.mkdir(distFolder, {recursive: true}, (err) => {
         files.forEach((file) => {
           const newSource = path.join(source, file);
           const newDestination = path.join(destination, file);
-      
-          if (fs.lstatSync(newSource).isDirectory()) {
-            fs.mkdir(newDestination, (err) => {
-              if (err) {
-                throw err;
-              }
-            });
-            readInnerFolders(newSource, newDestination);
-          } else {
-            fs.copyFile(newSource, newDestination, (err) => {
-              if (err) {
-                console.error(err);
+          fs.stat(newSource, (err, stats) => {
+            if (err) {
+              throw err;
+            } else {
+              if (stats.isDirectory()) {
+                fs.mkdir(newDestination, (err) => {
+                  if (err) {
+                    throw err;
+                  }
+                });
+                readInnerFolders(newSource, newDestination);
               } else {
-                console.log(`${file} copied successfully`);
+                fs.copyFile(newSource, newDestination, (err) => {
+                  if (err) {
+                    console.error(err);
+                  } else {
+                    console.log(`${file} copied successfully`);
+                  }
+                });
               }
-            });
-          }
+            }
+          });
         });
       });
     }
